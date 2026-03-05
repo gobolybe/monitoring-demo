@@ -1,0 +1,65 @@
+services:
+  pg-demo:
+    image: postgres:18
+    container_name: pg-demo
+    environment:
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: userpwd_1
+      POSTGRES_DB: demo_db
+    ports:
+      - "5432:5432"
+    networks:
+      - monitoring-network
+    volumes:
+      - ./scripts/init-db.sql:/docker-entrypoint-initdb.d/init-db.sql
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U user -d demo_db"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+  demo-backend:
+    build: ./usermaintenance # backend source code folder
+    # Itt már nem is muszáj kiengedni a 8080-as portot a külvilágnak, 
+    # mert az Nginx belső hálózaton eléri. De teszteléshez maradhat:
+    ports:
+      - "8080:8080"
+      - "8081:8081"
+    container_name: demo-backend
+    networks:
+      - monitoring-network
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://pg-demo:5432/demo_db
+  demo-gui:
+    build: ./usermaintenance-gui # gui folder
+    ports:
+      - "80:80"
+    container_name: demo-gui
+    networks:
+      - monitoring-network
+    depends_on:
+      - demo-backend
+  prometheus:
+    image: prom/prometheus:latest
+    container_name: prometheus
+    volumes:
+      - ./prometheus.yml:/etc/prometheus/prometheus.yml
+    ports:
+      - "9090:9090"
+    networks:
+      - monitoring-network
+
+  grafana:
+    image: grafana/grafana:latest
+    container_name: grafana
+    ports:
+      - "3000:3000"
+    environment:
+      - GF_SECURITY_ADMIN_PASSWORD=admin # Alapértelmezett jelszó
+    networks:
+      - monitoring-network
+    depends_on:
+      - prometheus
+
+networks:
+  monitoring-network:
+    driver: bridge

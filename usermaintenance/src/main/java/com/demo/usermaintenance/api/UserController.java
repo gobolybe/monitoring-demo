@@ -1,0 +1,31 @@
+package com.demo.usermaintenance.api;
+
+import com.demo.usermaintenance.model.UserDTO;
+import com.demo.usermaintenance.service.UserService;
+import jakarta.validation.Valid;
+import lombok.RequiredArgsConstructor;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+
+@RequiredArgsConstructor
+@RestController
+@Transactional
+@RequestMapping("/api/v1/user")
+public class UserController implements UserAPI {
+
+    private final UserService userService;
+
+    public List<UserDTO> getAllUsers(@RequestParam(required = false) String name) {
+        return userService.searchByName(name);
+    }
+
+    public UserDTO createUser(@Valid @RequestBody UserDTO user) {
+        return userService.save(user);
+    }
+
+    public void deleteUser(@PathVariable Long id) {
+        userService.deleteById(id);
+    }
+}

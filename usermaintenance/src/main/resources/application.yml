@@ -1,0 +1,53 @@
+spring:
+  application:
+    name: usermaintenance
+  cloud:
+    config:
+      allowOverride: true
+      overrideNone: true
+      overrideSystemProperties: false
+  web:
+    locale: en_US
+  datasource:
+    url: jdbc:postgresql://localhost:5432/demo_db
+    username: user
+    password: userpwd_1
+    hikari:
+      minimum-idle: 1
+      maximum-pool-size: 10
+  jpa:
+    open-in-view: false
+    properties:
+      hibernate:
+        jdbc:
+          lob:
+            non_contextual_creation: true
+    show-sql: false
+springdoc:
+  api-docs:
+    version: openapi_3_0
+    enabled: true
+  writer-with-order-by-keys: true
+  swagger-ui:
+    enabled: true
+management:
+  endpoint:
+    prometheus:
+      access: unrestricted
+  endpoints:
+    web:
+      exposure:
+        include: 'health,prometheus,info'
+  metrics:
+    tags:
+      application: ${spring.application.name}
+  server:
+    port: 8081
+  tracing:
+    sampling:
+      probability: 1.0
+    enabled: true
+  prometheus:
+    metrics:
+      export:
+        enabled: true
