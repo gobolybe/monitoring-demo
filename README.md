@@ -153,7 +153,6 @@ Grafana riasztásokat küld egy Discord csatornára webhookon keresztül.
 ---
 
 ## Dashboard & Alerting képernyőképek
-> Tipp: a képek a `assets/screenshots/` mappában vannak.
 ### Feladat / GUI
 ![Feladat / rendszer áttekintés](assets/screenshots/page-01.png)
 ### Feladat / Swagger API dokumentáció
