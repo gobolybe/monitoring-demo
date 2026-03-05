@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="1200" height="520" viewBox="0 0 1200 520" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <style>
+      .box { fill: #ffffff; stroke: #111827; stroke-width: 2; rx: 16; ry: 16; }
+      .title { font: 700 22px Arial; fill: #111827; }
+      .sub { font: 500 14px Arial; fill: #374151; }
+      .arrow { stroke: #111827; stroke-width: 2.5; fill: none; marker-end: url(#arrowhead); }
+    </style>
+    <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#111827"/>
+    </marker>
+  </defs>
+
+  <rect x="40" y="210" width="170" height="100" class="box"/>
+  <text x="125" y="252" text-anchor="middle" class="title">User</text>
+
+  <rect x="260" y="180" width="220" height="160" class="box"/>
+  <text x="370" y="236" text-anchor="middle" class="title">NGINX</text>
+
+  <rect x="540" y="90" width="260" height="140" class="box"/>
+  <text x="670" y="148" text-anchor="middle" class="title">Frontend</text>
+
+  <rect x="540" y="290" width="260" height="140" class="box"/>
+  <text x="670" y="348" text-anchor="middle" class="title">Backend</text>
+
+  <rect x="860" y="310" width="260" height="120" class="box"/>
+  <text x="990" y="366" text-anchor="middle" class="title">PostgreSQL</text>
+
+  <rect x="860" y="70" width="260" height="120" class="box"/>
+  <text x="990" y="126" text-anchor="middle" class="title">Prometheus</text>
+
+  <rect x="860" y="200" width="260" height="90" class="box"/>
+  <text x="990" y="252" text-anchor="middle" class="title">Grafana</text>
+
+  <path d="M210 260 L260 260" class="arrow"/>
+  <path d="M480 240 L540 160" class="arrow"/>
+  <path d="M480 280 L540 360" class="arrow"/>
+  <path d="M800 360 L860 360" class="arrow"/>
+  <path d="M670 290 L670 220 L860 130" class="arrow"/>
+  <path d="M370 180 L370 130 L860 130" class="arrow"/>
+  <path d="M990 310 L990 190" class="arrow"/>
+  <path d="M990 190 L990 200" class="arrow"/>
+</svg>
