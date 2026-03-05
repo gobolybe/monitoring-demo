@@ -9,4 +9,8 @@ scrape_configs:
 
   - job_name: 'nginx-frontend'
     static_configs:
-      - targets: ['demo-gui:80'] # Itt az Nginx alap metrics-ét vagy magát a hostot figyeljük
+      - targets: ['nginx-exporter:9113'] # Az exporter portja
+
+  - job_name: 'pg_exporter_v1'
+    static_configs:
+      - targets: ['pg_exporter:9630']
