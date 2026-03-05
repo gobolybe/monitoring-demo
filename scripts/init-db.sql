@@ -7,3 +7,8 @@ CREATE TABLE IF NOT EXISTS
         email                     CHARACTER VARYING,  
         CONSTRAINT pk_user PRIMARY KEY (id)
     );
+-- Felhasználó létrehozása
+CREATE USER postgres_exporter WITH PASSWORD 'postgres';
+
+-- Olvasási jog adása a statisztikákhoz (PostgreSQL 10+)
+GRANT pg_monitor TO postgres_exporter;

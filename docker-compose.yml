@@ -55,11 +55,12 @@ services:
     environment:
       # Itt sima kapcsolódási sztringet használunk
       # Formátum: postgres://user:pass@host:port/dbname?sslmode=disable
-      - PG_ADS=postgres://user:userpwd_1@pg-demo:5432/demo_db?sslmode=disable
+      PG_EXPORTER_URL: postgres://postgres_exporter:postgres@pg-demo:5432/demo_db?sslmode=disable
     ports:
       - "9630:9630"
     depends_on:
-      - pg-demo
+      pg-demo:
+        condition: service_healthy
     networks:
       - monitoring-network
   prometheus:
