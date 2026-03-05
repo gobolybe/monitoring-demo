@@ -1,0 +1,80 @@
+<div class="row mb-3">
+  <div class="col-md-12">
+    <div class="input-group">
+      <span class="input-group-text bg-white"><i class="bi bi-search"></i></span>
+      <input type="text"
+             class="form-control"
+             placeholder="Keresés név alapján..."
+             [(ngModel)]="searchTerm"
+             (input)="onSearch()">
+      <button class="btn btn-outline-secondary" type="button" (click)="searchTerm=''; onSearch()">
+        X
+      </button>
+    </div>
+  </div>
+</div>
+
+<div class="container mt-5">
+  <div class="card shadow">
+    <div class="card-header bg-primary text-white">
+      <h3 class="mb-0">Felhasználók kezelése</h3>
+    </div>
+    <div class="card-body">
+
+      <form #userForm="ngForm" (ngSubmit)="addUser(userForm)" class="row g-3 mb-4">
+        <div class="col-md-5">
+          <input type="text" name="name" class="form-control" placeholder="Teljes név"
+                 [(ngModel)]="newUser.name" required #name="ngModel"
+                 [class.is-invalid]="name.invalid && name.touched">
+          <div class="invalid-feedback">A név megadása kötelező (min. 2 karakter).</div>
+        </div>
+
+        <div class="col-md-5">
+          <input type="email" name="email" class="form-control" placeholder="Email cím"
+                 [(ngModel)]="newUser.email" required email #email="ngModel"
+                 [class.is-invalid]="email.invalid && email.touched">
+          <div class="invalid-feedback">Kérjük, adjon meg egy érvényes email címet.</div>
+        </div>
+
+        <div class="col-md-2">
+          <button type="submit" class="btn btn-success w-100" [disabled]="userForm.invalid">
+            <i class="bi bi-plus-lg"></i> Hozzáadás
+          </button>
+        </div>
+      </form>
+
+      <hr>
+
+      <table class="table table-hover mt-3">
+        <thead class="table-light">
+        <tr>
+          <th>ID</th>
+          <th>Név</th>
+          <th>Email</th>
+          <th class="text-center">Műveletek</th>
+        </tr>
+        </thead>
+        <tbody>
+          @for (user of users; track user.id) {
+            <tr>
+              <td>#{{user.id}}</td>
+              <td>{{user.name}}</td>
+              <td>{{user.email}}</td>
+              <td class="text-center">
+                <button class="btn btn-outline-danger btn-sm" (click)="deleteUser(user.id!)">
+                  Törlés
+                </button>
+              </td>
+            </tr>
+          }
+
+          @if (users.length === 0) {
+            <tr>
+              <td colspan="4" class="text-center text-muted">Nincsenek felhasználók az adatbázisban.</td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
