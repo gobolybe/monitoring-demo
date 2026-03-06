@@ -9,6 +9,11 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+/**
+ * Controller class responsible for handling API requests related to user operations.
+ * This includes retrieving a list of users, creating a new user, and deleting a user
+ * by their unique identifier. Acts as the RESTful API layer for user-related actions.
+ */
 @RequiredArgsConstructor
 @RestController
 @Transactional

@@ -11,6 +11,11 @@ import lombok.Data;
 import java.io.Serial;
 import java.io.Serializable;
 
+/**
+ * Data Transfer Object (DTO) representing a user in the system.
+ * This class is used to encapsulate user data transferred between different application layers.
+ * It provides a structured representation of the user's information.
+ */
 @Data
 @Builder
 @AllArgsConstructor

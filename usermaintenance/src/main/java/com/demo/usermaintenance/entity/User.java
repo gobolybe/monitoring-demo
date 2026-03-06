@@ -10,6 +10,10 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 import lombok.Data;
 
+/**
+ * Entity class representing a User.
+ * Contains fields for the user's basic information such as ID, name, and email.
+ */
 @Entity(name = "user_sample")
 @Data
 @Schema(description = "Felhasználó entitás, mely a felhasználó alapvető adatait tartalmazza")
