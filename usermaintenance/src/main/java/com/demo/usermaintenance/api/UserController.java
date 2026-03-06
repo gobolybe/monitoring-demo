@@ -22,14 +22,17 @@ public class UserController implements UserAPI {
 
     private final UserService userService;
 
+    @Override
     public List<UserDTO> getAllUsers(@RequestParam(required = false) String name) {
         return userService.searchByName(name);
     }
 
+    @Override
     public UserDTO createUser(@Valid @RequestBody UserDTO user) {
         return userService.save(user);
     }
 
+    @Override
     public void deleteUser(@PathVariable Long id) {
         userService.deleteById(id);
     }
